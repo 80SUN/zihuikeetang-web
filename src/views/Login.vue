@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="login-page">
     <div class="background-wrapper">
       <div class="glass-sphere sphere-1"></div>
