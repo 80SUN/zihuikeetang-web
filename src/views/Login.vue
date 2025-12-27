@@ -1,12 +1,15 @@
 <template>
   <div class="flex items-center justify-center min-h-screen bg-slate-50 relative overflow-hidden">
+    <!-- 背景装饰 -->
     <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
     <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
 
+    <!-- 登录卡片 -->
     <div class="z-10 w-full max-w-md p-10 bg-white/80 backdrop-blur-lg border border-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
       <div class="text-center mb-10">
         <div class="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-xl bg-blue-600 shadow-lg shadow-blue-200">
-          <icon-book class="text-white text-3xl" /> </div>
+          <icon-book class="text-white text-3xl" />
+        </div>
         <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">智慧课堂</h2>
         <p class="mt-2 text-sm text-gray-500">欢迎回来，请登录您的账户</p>
       </div>
@@ -24,27 +27,9 @@
           </a-input-password>
         </a-form-item>
 
-        <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center justify-between mb-8">
           <a-checkbox v-model="form.remember">记住我</a-checkbox>
           <a-link type="primary" size="small">忘记密码？</a-link>
-        </div>
-
-        <!-- 新增的教师和学生按钮 -->
-        <div class="flex justify-between mb-6">
-          <a-button
-              size="large"
-              class="w-full mr-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition-all shadow-md hover:shadow-lg"
-              @click="handleTeacherLogin"
-          >
-            教师登录
-          </a-button>
-          <a-button
-              size="large"
-              class="w-full ml-2 rounded-lg bg-green-600 hover:bg-green-700 transition-all shadow-md hover:shadow-lg"
-              @click="handleStudentLogin"
-          >
-            学生登录
-          </a-button>
         </div>
 
         <a-form-item>
@@ -53,14 +38,15 @@
               long
               size="large"
               :loading="loading"
-              class="rounded-lg bg-blue-600 hover:bg-blue-700 transition-all shadow-md hover:shadow-lg"
+              type="primary"
+              class="rounded-lg bg-blue-600 hover:bg-blue-700 transition-all shadow-md hover:shadow-lg h-12 text-lg"
           >
             立即登录
           </a-button>
         </a-form-item>
       </a-form>
 
-      <div class="mt-8 text-center">
+      <div class="mt-6 text-center">
         <span class="text-sm text-gray-500">还没有账号？</span>
         <a-link type="primary">申请加入</a-link>
       </div>
@@ -88,6 +74,11 @@ const adminUsername = 'dsq123456';
 const adminPassword = 'dsq123456';
 
 const handleSubmit = async () => {
+  if (!form.username || !form.password) {
+    Message.warning('请输入用户名和密码');
+    return;
+  }
+
   loading.value = true;
 
   try {
@@ -99,30 +90,17 @@ const handleSubmit = async () => {
       console.log('管理员登录成功');
       Message.success('管理员登录成功，正在跳转...');
       router.push('/manager/roleManage'); // 管理员跳转到角色管理页面
-    } else if (form.username && form.password) {
+    } else {
+      // 普通用户登录逻辑 (此处可根据需要修改跳转路径，例如 '/dashboard')
       console.log('登录成功');
       Message.success('登录成功，正在跳转...');
-      router.push('/dashboard'); // 其他用户跳转到主页面
-    } else {
-      Message.error('用户名或密码错误');
+      router.push('/dashboard');
     }
   } catch (err) {
     Message.error('登录失败，请重试');
   } finally {
     loading.value = false;
   }
-};
-
-// 教师登录处理函数
-const handleTeacherLogin = () => {
-  console.log('教师登录');
-  router.push('/teacher/dashboard');
-};
-
-// 学生登录处理函数
-const handleStudentLogin = () => {
-  console.log('学生登录');
-  router.push('/student/dashboard');
 };
 </script>
 

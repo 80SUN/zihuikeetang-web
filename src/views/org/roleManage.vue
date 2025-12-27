@@ -8,7 +8,7 @@
     </div>
 
     <!-- 主容器 -->
-    <div class="z-10 w-full max-w-5xl p-6">
+    <div class="z-10 w-full max-w-7xl p-6">
 
       <!-- 页面标题区域 -->
       <div class="mb-8 text-center md:text-left">
@@ -19,7 +19,7 @@
       <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
 
         <!-- 左侧：权限配置区 (占8列) -->
-        <div class="md:col-span-8">
+        <div class="md:col-span-7">
           <div class="bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl shadow-xl p-6 h-full flex flex-col">
 
             <!-- 顶部：角色切换 -->
@@ -96,8 +96,13 @@
         </div>
 
         <!-- 右侧：当前角色预览区 (占4列) -->
-        <div class="md:col-span-4">
-          <div class="bg-white/90 backdrop-blur-xl border border-white/60 rounded-2xl shadow-xl p-8 sticky top-8 text-center transition-all duration-500">
+        <div class="md:col-span-5">
+          <div
+              class="backdrop-blur-xl border-2 rounded-2xl shadow-xl p-8 sticky top-8 text-center transition-all duration-500"
+              :class="currentRole === 'teacher'
+    ? 'bg-blue-50/80 border-blue-200 shadow-blue-100'
+    : 'bg-green-50/80 border-green-200 shadow-green-100'"
+          >
 
             <!-- 动态头像 -->
             <div class="relative inline-block mb-6 group">
@@ -127,7 +132,10 @@
             <!-- 角色统计/信息卡片 -->
             <div class="space-y-3 text-left">
               <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex items-center gap-3">
-                <div class="p-2 bg-white rounded-lg shadow-sm text-blue-600">
+                <div
+                    class="p-2 bg-white rounded-lg shadow-sm transition-colors duration-300"
+                    :class="currentRole === 'teacher' ? 'text-blue-600' : 'text-green-600'"
+                >
                   <icon-user-group />
                 </div>
                 <div>
@@ -137,7 +145,10 @@
               </div>
 
               <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex items-center gap-3">
-                <div class="p-2 bg-white rounded-lg shadow-sm text-purple-600">
+                <div
+                    class="p-2 bg-white rounded-lg shadow-sm transition-colors duration-300"
+                    :class="currentRole === 'teacher' ? 'text-blue-600' : 'text-green-600'"
+                >
                   <icon-safe />
                 </div>
                 <div>
@@ -165,7 +176,7 @@ import { ref, reactive, } from 'vue';
 import { Message } from '@arco-design/web-vue';
 import {
   IconSettings, IconUser, IconFaceSmileFill, IconSave, IconFolder,
-   IconFile, IconUserGroup, IconSafe
+  IconFile, IconUserGroup, IconSafe
 } from '@arco-design/web-vue/es/icon';
 
 // --- 类型定义 ---
