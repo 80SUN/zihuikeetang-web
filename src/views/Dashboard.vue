@@ -33,6 +33,11 @@
           <div class="bg-white p-6 rounded shadow-sm h-full">
             <h2 class="text-lg font-medium mb-4">欢迎来到智慧课堂</h2>
             <p>这里是仪表盘区域</p>
+            <a-button @click="handleJump">
+              跳转
+            </a-button>
+          </div>
+          <div>
           </div>
         </a-layout-content>
       </a-layout>
@@ -42,4 +47,12 @@
 
 <script setup lang="ts">
 import { IconDashboard, IconBook, IconUserGroup, IconFile } from '@arco-design/web-vue/es/icon';
+import {useRouter} from "vue-router";
+
+const router = useRouter();
+
+const handleJump = ()=>{
+  console.log('准备跳转到teacher Home')
+  router.push("/teacher/home")
+}
 </script>

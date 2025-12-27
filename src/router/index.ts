@@ -14,6 +14,14 @@ const router = createRouter({
     {
       path: '/dashboard',
       component: () => import('../views/Dashboard.vue')
+    },
+    {
+      path: '/teacher/home',
+      component: () => import('../views/teacher/Home.vue')
+    },
+    {
+      path: '/manager/roleManage',
+      component: () => import('../views/org/roleManage.vue')
     }
   ]
 });
