@@ -128,7 +128,7 @@ const allMenus = [
     key: 'learning',
     icon: IconFile,
     path: '/student/dashboard',
-    perm: 'student:*',
+    perm: 'student:center',
     children: [
         { title: '我的学习', key: 'learning:my', path: '/student/dashboard', perm: 'student:course' },
         { title: '选课中心', key: 'learning:find', path: '/courses/find', perm: 'student:course' },
